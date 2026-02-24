@@ -8,6 +8,11 @@ RUN npm ci
 
 COPY . .
 
+# Allow overriding the API base URL at build time
+# Example: docker build --build-arg VITE_API_URL=/api .
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=$VITE_API_URL
+
 RUN npm run build
 
 FROM nginx:alpine
